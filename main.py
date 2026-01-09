@@ -33,7 +33,7 @@ class MyRequestHandler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(b"Bad Request")
 
 if __name__ == "__main__":
-    server_address = ('', 48497)
+    server_address = ('', 8080)
     httpd = http.server.HTTPServer(server_address, MyRequestHandler)
-    print("Server running on http://0.0.0.0:48497")
+    print("Server running on http://0.0.0.0:8080")
     httpd.serve_forever()

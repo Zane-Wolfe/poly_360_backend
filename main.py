@@ -5,13 +5,10 @@ import os
 
 def getAllValidLocationNames():
     locations = {"IST": [], "BARC": []}
-    # Do for IST
-    for fileName in os.listdir("images/IST"):
-        locations["IST"].append(fileName)
 
-    # Do for BARC
-    for fileName in os.listdir("images/BARC"):
-        locations["BARC"].append(fileName)
+    locations["IST"] = sorted(os.listdir("images/IST"))
+    locations["BARC"] = sorted(os.listdir("images/BARC"))
+
     return locations
 
 # Create Dictionary of valid locations and their rooms

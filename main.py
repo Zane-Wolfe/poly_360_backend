@@ -26,7 +26,7 @@ class MyRequestHandler(http.server.BaseHTTPRequestHandler):
 
         if parsed_path.path == '/get-image' and room:
             building = room.split('-')[0]
-            file_path = f"images/{building}/{room}.jpg"
+            file_path = f"images/{building}/{room}.JPG"
 
             # direction is valid and given
             if moveDirection is not None:
@@ -61,7 +61,7 @@ class MyRequestHandler(http.server.BaseHTTPRequestHandler):
                 file_path = f"images/{building}/{targetPhotoFileName}"
 
             if os.path.exists(file_path):
-                filename = os.path.basename(file_path)  # Extract filename (e.g., "IST-1002.jpg")
+                filename = os.path.basename(file_path)  # Extract filename (e.g., "IST-1002.JPG")
 
                 # Respond with the image
                 self.send_response(200)

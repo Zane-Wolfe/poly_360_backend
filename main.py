@@ -2,12 +2,15 @@ import http.server
 import urllib.parse
 import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+IMAGES_DIR = os.path.join(BASE_DIR, "images")
+
 
 def getAllValidLocationNames():
     locations = {"IST": [], "BARC": []}
 
-    locations["IST"] = sorted(os.listdir("images/IST"))
-    locations["BARC"] = sorted(os.listdir("images/BARC"))
+    locations["IST"] = sorted(os.listdir(os.path.join(IMAGES_DIR, "IST")))
+    locations["BARC"] = sorted(os.listdir(os.path.join(IMAGES_DIR, "BARC")))
 
     return locations
 
@@ -23,7 +26,8 @@ class MyRequestHandler(http.server.BaseHTTPRequestHandler):
 
         if parsed_path.path == '/get-image' and room:
             building = room.split('-')[0]
-            file_path = f"images/{building}/{room}.JPG"
+            file_path = os.path.join(IMAGES_DIR, building, f"{room}.JPG")
+
 
             # direction is valid and given
             if moveDirection is not None:
@@ -55,7 +59,7 @@ class MyRequestHandler(http.server.BaseHTTPRequestHandler):
                     self.wfile.write(b"Bad Request")
                     return
                 targetPhotoFileName = validLocationNames[building][targetPhotoIndex]
-                file_path = f"images/{building}/{targetPhotoFileName}"
+                file_path = os.path.join(IMAGES_DIR, building, targetPhotoFileName)
 
             if os.path.exists(file_path):
                 filename = os.path.basename(file_path)  # Extract filename (e.g., "IST-1002.JPG")
